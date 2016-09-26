@@ -1,0 +1,80 @@
+package subaraki.umbralux.handler.event;
+
+import java.util.Map;
+
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import subaraki.BMA.item.BmaItems;
+import subaraki.rpginventory.mod.RpgInventory;
+import subaraki.umbralux.entity.minion.EntityMinionSkeleton;
+import subaraki.umbralux.entity.minion.EntityMinionZombie;
+import subaraki.umbralux.item.UmbraLuxItems;
+
+public class PaladinWeaponEvent {
+
+	public PaladinWeaponEvent() {
+		MinecraftForge.EVENT_BUS.register(this);
+	}
+
+	@SubscribeEvent
+	public void onPlayerUpdateTick(LivingUpdateEvent event){
+		calculatePaladinBonus(event);
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	private void calculatePaladinBonus(LivingUpdateEvent event){
+		if(!(event.getEntityLiving() instanceof EntityPlayer))
+			return;
+
+		EntityPlayer player = (EntityPlayer)event.getEntityLiving();
+		if(player == null)
+			return;
+
+		ItemStack heldItem = player.getHeldItemMainhand();
+
+		if(heldItem == null)
+			return;
+		if(heldItem.getItem().equals(UmbraLuxItems.paladin_sword))
+
+			if(RpgInventory.playerClass.contains(UmbraLuxItems.PALADIN_CLASS)){
+				if(RpgInventory.playerClass.contains("_shielded"))
+					addEnchantment(Enchantments.SMITE, 4, heldItem);
+				else
+					addEnchantment(Enchantments.SMITE, 2, heldItem);
+			}else
+				removeEnchantment(Enchantments.SMITE, heldItem);
+	}
+
+	private void addEnchantment(Enchantment ench, int level, ItemStack stack){
+		Map<Enchantment, Integer> tmp = EnchantmentHelper.getEnchantments(stack);
+
+		if(!tmp.containsKey(ench))
+			tmp.put(ench, level);
+		else if(tmp.get(ench) != level)
+			tmp.put(ench, level);
+
+		EnchantmentHelper.setEnchantments(tmp,stack);
+	}
+
+	private void removeEnchantment(Enchantment ench, ItemStack stack){
+		Map<Enchantment, Integer> tmp = EnchantmentHelper.getEnchantments(stack);
+		if(!tmp.containsKey(ench))
+			return;
+		tmp.remove(ench);
+		EnchantmentHelper.setEnchantments(tmp, stack);
+	}
+}

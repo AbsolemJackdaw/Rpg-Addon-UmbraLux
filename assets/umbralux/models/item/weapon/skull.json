@@ -1,0 +1,17 @@
+{
+    "parent": "umbralux:item/weapon/skull_model",
+    
+    "textures": {
+     "0": "blocks/bone_block_side"
+    },
+    
+     "overrides" : [
+      {
+            "predicate": {
+                "activate": 0.2
+            },
+            "model": "umbralux:item/weapon/skull_active"
+      }
+      
+    ]  
+}
