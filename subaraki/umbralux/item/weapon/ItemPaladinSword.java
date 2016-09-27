@@ -48,7 +48,8 @@ public class ItemPaladinSword extends ItemSword{
 	@Override
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
 		if(entityLiving instanceof EntityPlayer)
-			((EntityPlayer)entityLiving).getCooldownTracker().setCooldown(this, 7);
+			if(!((EntityPlayer)entityLiving).getCooldownTracker().hasCooldown(this))
+				((EntityPlayer)entityLiving).getCooldownTracker().setCooldown(this, 7);
 
 		return super.onEntitySwing(entityLiving, stack);
 	}

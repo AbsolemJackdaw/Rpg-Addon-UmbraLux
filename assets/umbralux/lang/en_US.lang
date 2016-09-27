@@ -16,8 +16,8 @@ item.paladin_feet.name=Paladin Boots
 item.umbralux.craftLeather_0.name=Dark Leather
 item.umbralux.craftLeather_1.name=Gilded Iron
 
-item.umbralux.necro_plate.name=Bone Plate
-item.umbralux.paladin_plate.name=Gilded Plate
+item.umbralux.necro_plate.name=Bone Plating
+item.umbralux.paladin_plate.name=Gilded Plating
 
 #Entity Messages
 death.attack.minion=%1$s was obliterated by a necromancer's Minion.
