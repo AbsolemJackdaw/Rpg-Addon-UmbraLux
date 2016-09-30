@@ -1,12 +1,12 @@
 package subaraki.umbralux.item.armor;
 
+import lib.item.armor.ModeledArmor;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
-import subaraki.rpginventory.api.ModeledArmor;
 import subaraki.umbralux.handler.proxy.ClientProxy;
 import subaraki.umbralux.item.UmbraLuxItems;
 import subaraki.umbralux.mod.AddonUmbraLux;

@@ -2,6 +2,7 @@ package subaraki.umbralux.handler.event;
 
 import java.util.Map;
 
+import lib.playerclass.PlayerClass;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import subaraki.rpginventory.mod.RpgInventory;
 import subaraki.umbralux.item.UmbraLuxItems;
 
 public class PaladinWeaponEvent {
@@ -41,8 +41,8 @@ public class PaladinWeaponEvent {
 			return;
 		if(heldItem.getItem().equals(UmbraLuxItems.paladin_sword))
 
-			if(RpgInventory.playerClass.contains(UmbraLuxItems.PALADIN_CLASS)){
-				if(RpgInventory.playerClass.contains("_shielded"))
+			if(PlayerClass.isInstanceOf(UmbraLuxItems.PALADIN_CLASS)){
+				if(PlayerClass.isShielded())
 					addEnchantment(Enchantments.SMITE, 4, heldItem);
 				else
 					addEnchantment(Enchantments.SMITE, 2, heldItem);

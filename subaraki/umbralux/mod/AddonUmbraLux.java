@@ -15,7 +15,7 @@ import subaraki.umbralux.handler.proxy.ServerProxy;
 import subaraki.umbralux.item.UmbraLuxItems;
 import subaraki.umbralux.network.PacketHandler;
 
-@Mod(modid = AddonUmbraLux.MODID, name = AddonUmbraLux.NAME, version = AddonUmbraLux.VERSION, dependencies = "required-after:rpginventory;required-after:subcommonlib")
+@Mod(modid = AddonUmbraLux.MODID, name = AddonUmbraLux.NAME, version = AddonUmbraLux.VERSION, dependencies = "required-after:subcommonlib")
 public class AddonUmbraLux {
 
 	public static final String MODID = "umbralux";

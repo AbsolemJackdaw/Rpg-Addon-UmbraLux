@@ -4,6 +4,7 @@ import java.util.ConcurrentModificationException;
 
 import javax.annotation.Nullable;
 
+import lib.playerclass.PlayerClass;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityTameable;
@@ -25,7 +26,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import subaraki.rpginventory.mod.RpgInventory;
 import subaraki.umbralux.entity.EntityNecroCloud;
 import subaraki.umbralux.entity.minion.EntityMinionZombie;
 import subaraki.umbralux.entity.minion.IMinion;
@@ -59,7 +59,7 @@ public class ItemSkull extends Item{
 
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft){
 		
-		if(!RpgInventory.playerClass.contains(UmbraLuxItems.NECROMANCER_CLASS))
+		if(!PlayerClass.isInstanceOf(UmbraLuxItems.NECROMANCER_CLASS))
 			return;
 		
 		float count = (float)(stack.getMaxItemUseDuration() - entityLiving.getItemInUseCount()) / 20.0F;
@@ -75,7 +75,7 @@ public class ItemSkull extends Item{
 		else if (count < 0.2F){
 			if(entityLiving instanceof EntityPlayer){
 				EntityPlayer player = (EntityPlayer)entityLiving;
-				if(MinionRegistry.minionsForPlayer(player).size() < (RpgInventory.playerClass.contains(RpgInventory.shielded_class) ? 5 : 2))
+				if(MinionRegistry.minionsForPlayer(player).size() < (PlayerClass.isShielded() ? 5 : 2))
 					if(!player.getCooldownTracker().hasCooldown(this)){
 						EntityMinionZombie emz = new EntityMinionZombie(player.worldObj);
 						emz.setPositionAndRotation(player.posX + player.getLook(1F).xCoord, player.posY, player.posZ + player.getLook(1F).zCoord, -player.getRotationYawHead(), -player.rotationPitch);
