@@ -1,10 +1,8 @@
 package subaraki.umbralux.entity.damage;
 
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import subaraki.umbralux.entity.EntitySwordSpecial;
-import subaraki.umbralux.entity.minion.IMinion;
 
 public class DamageSourcePaladin {
 	

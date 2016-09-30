@@ -8,13 +8,11 @@ import static net.minecraft.client.renderer.GlStateManager.translate;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
-import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.ForgeHooksClient;
 import subaraki.umbralux.item.UmbraLuxItems;
 
 public class RenderSwordSpecial extends Render<EntitySwordSpecial>{

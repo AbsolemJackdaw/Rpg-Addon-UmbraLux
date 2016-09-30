@@ -1,15 +1,6 @@
 package subaraki.umbralux.network;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.monster.SkeletonType;
-import net.minecraft.entity.monster.ZombieType;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;

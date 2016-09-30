@@ -1,7 +1,5 @@
 package subaraki.umbralux.entity.minion;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -35,8 +33,6 @@ import net.minecraft.pathfinding.Path;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import subaraki.umbralux.entity.damage.DamageSourceMinion;
-import subaraki.umbralux.item.UmbraLuxItems;
-import subaraki.umbralux.mod.AddonUmbraLux;
 
 public class EntityMinionZombie extends EntityTameable  implements IMob, IMinion{
 

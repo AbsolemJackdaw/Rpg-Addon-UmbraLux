@@ -4,22 +4,13 @@ import java.util.Map;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import subaraki.BMA.item.BmaItems;
 import subaraki.rpginventory.mod.RpgInventory;
-import subaraki.umbralux.entity.minion.EntityMinionSkeleton;
-import subaraki.umbralux.entity.minion.EntityMinionZombie;
 import subaraki.umbralux.item.UmbraLuxItems;
 
 public class PaladinWeaponEvent {
