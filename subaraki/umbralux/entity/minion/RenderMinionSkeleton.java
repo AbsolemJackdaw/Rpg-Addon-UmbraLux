@@ -13,7 +13,7 @@ public class RenderMinionSkeleton extends RenderBiped<EntityMinionSkeleton> impl
     private static final ResourceLocation SKELETON_TEXTURES = new ResourceLocation("textures/entity/skeleton/skeleton.png");
 
 	public RenderMinionSkeleton(RenderManager renderManager) {
-		super(renderManager, new ModelMinionSkeleton(), 0.5f, 0.5f);
+		super(renderManager, new ModelMinionSkeleton(), 0.5f);
 		 this.addLayer(new LayerHeldItem(this));
 	}
 

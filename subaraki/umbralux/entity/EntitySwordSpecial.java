@@ -9,6 +9,7 @@ import com.google.common.base.Optional;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityTameable;
@@ -52,8 +53,8 @@ public class EntitySwordSpecial extends EntityLivingBase{
 		super.setLocationAndAngles(posx, posy, posz, yaw, pitch);
 
 		BlockPos pos = new BlockPos(posX, posY, posZ);
-		if(worldObj.isAirBlock(pos))
-			worldObj.setBlockState(pos, UmbraLuxBlocks.airLuminence.getDefaultState());
+		if(world.isAirBlock(pos))
+			world.setBlockState(pos, UmbraLuxBlocks.airLuminence.getDefaultState());
 	}
 
 	@Override
@@ -72,7 +73,7 @@ public class EntitySwordSpecial extends EntityLivingBase{
 	}
 	
 	private void attackSurroundingEntities(){
-		List<EntityLivingBase> enemiesInRange = worldObj.getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox().expand(5, 2, 5));
+		List<EntityLivingBase> enemiesInRange = world.getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox().expand(5, 2, 5));
 		for(EntityLivingBase elb : enemiesInRange){
 			if(elb instanceof IMinion){
 				if(elb.ticksExisted%5==0){
@@ -101,21 +102,21 @@ public class EntitySwordSpecial extends EntityLivingBase{
 
 	private void spawnParticles(){
 		if(ticksExisted == 5){
-			worldObj.playSound(posX, posY, posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL, 1.0f, 1.0f, true);
+			world.playSound(posX, posY, posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL, 1.0f, 1.0f, true);
 			for(int i = 0; i < 3; i++)
-				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, posX, posY, posZ, 0, 0, 0, new int[0]);
+				world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, posX, posY, posZ, 0, 0, 0, new int[0]);
 		}
 
 		if(ticksExisted > 5){
 			rotationYawHead += 2f;
 			for(float f = 0; f < 360; f+=45){
 				Vec3d vec = getVectorForRotation(0, f + rotationYawHead);
-				worldObj.spawnParticle(EnumParticleTypes.FLAME, posX, posY+0.4, posZ, vec.xCoord/5, 0, vec.zCoord/5, new int[0]);
+				world.spawnParticle(EnumParticleTypes.FLAME, posX, posY+0.4, posZ, vec.xCoord/5, 0, vec.zCoord/5, new int[0]);
 			}
 
 			for(float f = 0; f < 360; f+=2){
 				Vec3d vec = getVectorForRotation(0, f + rotationYawHead);
-				worldObj.spawnParticle(EnumParticleTypes.FLAME, posX+ vec.xCoord*8, posY + rand.nextDouble()*2d - 1d, posZ+ vec.zCoord*8, rand.nextDouble()/50d, 0.1, rand.nextDouble()/50d, new int[0]);
+				world.spawnParticle(EnumParticleTypes.FLAME, posX+ vec.xCoord*8, posY + rand.nextDouble()*2d - 1d, posZ+ vec.zCoord*8, rand.nextDouble()/50d, 0.1, rand.nextDouble()/50d, new int[0]);
 			}
 		}
 	}
@@ -123,19 +124,19 @@ public class EntitySwordSpecial extends EntityLivingBase{
 	private void removeSword(){
 		if(getOwner() == null)
 			if(inventory[0] != null)
-				if(!worldObj.isRemote)
-					worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, inventory[0].copy()));
+				if(!world.isRemote)
+					world.spawnEntity(new EntityItem(world, posX, posY, posZ, inventory[0].copy()));
 
 		if(getOwner()!= null && inventory[0] != null){
-			if(!worldObj.isRemote)
+			if(!world.isRemote)
 				getOwner().inventory.addItemStackToInventory(inventory[0].copy());
 			getOwner().getCooldownTracker().setCooldown(inventory[0].getItem(), 250);
 		}
 
 		BlockPos pos = new BlockPos(posX, posY, posZ);
-		if(worldObj.getLightFor(EnumSkyBlock.BLOCK, pos) != 0){
-			if(worldObj.getBlockState(pos).equals(UmbraLuxBlocks.airLuminence.getDefaultState())){
-				worldObj.setBlockToAir(pos);
+		if(world.getLightFor(EnumSkyBlock.BLOCK, pos) != 0){
+			if(world.getBlockState(pos).equals(UmbraLuxBlocks.airLuminence.getDefaultState())){
+				world.setBlockToAir(pos);
 			}
 		}
 	}
@@ -195,7 +196,7 @@ public class EntitySwordSpecial extends EntityLivingBase{
 
 		if(compound.hasKey("stack")){
 			NBTTagCompound stackTag = compound.getCompoundTag("stack");
-			inventory[0] = ItemStack.loadItemStackFromNBT(stackTag);
+			inventory[0] = new ItemStack(stackTag);
 		}
 	}
 
@@ -210,7 +211,7 @@ public class EntitySwordSpecial extends EntityLivingBase{
 
 	public EntityPlayer getOwner(){
 		UUID uuid = this.getOwnerId();
-		return uuid == null ? null : this.worldObj.getPlayerEntityByUUID(uuid);
+		return uuid == null ? null : this.world.getPlayerEntityByUUID(uuid);
 	}
 
 	@Override

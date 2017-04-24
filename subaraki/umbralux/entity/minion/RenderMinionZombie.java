@@ -13,7 +13,7 @@ public class RenderMinionZombie extends RenderBiped<EntityMinionZombie> implemen
 	private static final ResourceLocation ZOMBIE_TEXTURES = new ResourceLocation("textures/entity/zombie/zombie.png");
 
 	public RenderMinionZombie(RenderManager renderManager) {
-		super(renderManager, new ModelZombie(), 0.5f, 0.5f);
+		super(renderManager, new ModelZombie(), 0.5f);
 	}
 
 	@Override

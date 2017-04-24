@@ -90,7 +90,7 @@ public class EntityMinionZombie extends EntityTameable  implements IMob, IMinion
 
 	@Override
 	public void setOwnerId(UUID theUUID) {
-		EntityPlayer player = worldObj.getPlayerEntityByUUID(theUUID);
+		EntityPlayer player = world.getPlayerEntityByUUID(theUUID);
 
 		if(player != null)
 			MinionRegistry.addMinionForPlayer(player, this);

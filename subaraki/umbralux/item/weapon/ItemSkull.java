@@ -67,7 +67,7 @@ public class ItemSkull extends Item{
 			EntityNecroCloud cloud = new EntityNecroCloud(worldIn, entityLiving);
 			cloud.setPosition(entityLiving.posX + entityLiving.getLookVec().xCoord, entityLiving.posY + entityLiving.getEyeHeight() - 0.1, entityLiving.posZ + entityLiving.getLookVec().zCoord);
 			if(!worldIn.isRemote)
-				worldIn.spawnEntityInWorld(cloud);
+				worldIn.spawnEntity(cloud);
 			if(entityLiving instanceof EntityPlayer){
 				((EntityPlayer)entityLiving).getCooldownTracker().setCooldown(this, 50);
 			}
@@ -77,15 +77,15 @@ public class ItemSkull extends Item{
 				EntityPlayer player = (EntityPlayer)entityLiving;
 				if(MinionRegistry.minionsForPlayer(player).size() < (PlayerClass.isShielded() ? 5 : 2))
 					if(!player.getCooldownTracker().hasCooldown(this)){
-						EntityMinionZombie emz = new EntityMinionZombie(player.worldObj);
+						EntityMinionZombie emz = new EntityMinionZombie(player.world);
 						emz.setPositionAndRotation(player.posX + player.getLook(1F).xCoord, player.posY, player.posZ + player.getLook(1F).zCoord, -player.getRotationYawHead(), -player.rotationPitch);
 
-						if (!player.worldObj.isRemote){
+						if (!player.world.isRemote){
 							emz.setOwnerId(player.getUniqueID());
-							player.worldObj.spawnEntityInWorld(emz);
+							player.world.spawnEntity(emz);
 						}else{
 							for(int i = 0; i < 100; i++)
-								player.worldObj.spawnParticle(EnumParticleTypes.FLAME, emz.posX-0.5+player.worldObj.rand.nextDouble(), emz.posY - player.worldObj.rand.nextDouble(), emz.posZ-0.5+player.worldObj.rand.nextDouble(), 0, 0.1D, 0, new int[0]);
+								player.world.spawnParticle(EnumParticleTypes.FLAME, emz.posX-0.5+player.world.rand.nextDouble(), emz.posY - player.world.rand.nextDouble(), emz.posZ-0.5+player.world.rand.nextDouble(), 0, 0.1D, 0, new int[0]);
 						}
 						player.getCooldownTracker().setCooldown(this, 50);
 					}
@@ -107,7 +107,7 @@ public class ItemSkull extends Item{
 						for(IMinion minion : MinionRegistry.minionsForPlayer(player)){
 							EntityTameable theMinion = (EntityTameable)minion;
 
-							if(player.worldObj.getEntityByID(theMinion.getEntityId()) == null){
+							if(player.world.getEntityByID(theMinion.getEntityId()) == null){
 								//keep the map clean
 								MinionRegistry.removeMinion(player, minion);
 								break;
@@ -120,12 +120,12 @@ public class ItemSkull extends Item{
 									playerPosition.getY() - minionPosition.getY(),
 									playerPosition.getZ() - minionPosition.getZ());
 
-							if(elb.worldObj.isRemote)
+							if(elb.world.isRemote)
 								for(int i = 0; i < 2; i++)
-									elb.worldObj.spawnParticle(EnumParticleTypes.CRIT, 
-											theMinion.posX + elb.worldObj.rand.nextDouble() - 0.25, 
+									elb.world.spawnParticle(EnumParticleTypes.CRIT, 
+											theMinion.posX + elb.world.rand.nextDouble() - 0.25, 
 											theMinion.posY + theMinion.getEyeHeight(), 
-											theMinion.posZ + elb.worldObj.rand.nextDouble() - 0.25,
+											theMinion.posZ + elb.world.rand.nextDouble() - 0.25,
 											vec.xCoord/1.2D, vec.yCoord/1.2D, vec.zCoord/1.2D, new int[0]);
 
 							if(count % 5 == 0){
@@ -138,12 +138,12 @@ public class ItemSkull extends Item{
 								}
 							}
 						}
-						if(elb.worldObj.isRemote)
+						if(elb.world.isRemote)
 							for(int i = 0; i < 5; i++)
-								elb.worldObj.spawnParticle(EnumParticleTypes.DRIP_LAVA, 
-										elb.posX + (0.5D + elb.worldObj.rand.nextDouble()*2) - 1.25D, 
-										elb.posY + elb.worldObj.rand.nextDouble(), 
-										elb.posZ + (0.5D + elb.worldObj.rand.nextDouble()*2) - 1.25D,
+								elb.world.spawnParticle(EnumParticleTypes.DRIP_LAVA, 
+										elb.posX + (0.5D + elb.world.rand.nextDouble()*2) - 1.25D, 
+										elb.posY + elb.world.rand.nextDouble(), 
+										elb.posZ + (0.5D + elb.world.rand.nextDouble()*2) - 1.25D,
 										0, 0, 0, new int[0]);
 					}
 

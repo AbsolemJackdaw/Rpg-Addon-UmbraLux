@@ -93,7 +93,7 @@ public class EntityMinionSkeleton extends EntityTameable  implements IMob, IMini
 
 	@Override
 	public void setOwnerId(UUID theUUID) {
-		EntityPlayer player = worldObj.getPlayerEntityByUUID(theUUID);
+		EntityPlayer player = world.getPlayerEntityByUUID(theUUID);
 
 		if(player != null)
 			MinionRegistry.addMinionForPlayer(player, this);
@@ -227,16 +227,16 @@ public class EntityMinionSkeleton extends EntityTameable  implements IMob, IMini
 
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase target, float p_82196_2_) {
-		EntityTippedArrow entitytippedarrow = new EntityTippedArrow(this.worldObj, this);
+		EntityTippedArrow entitytippedarrow = new EntityTippedArrow(this.world, this);
 		double d0 = target.posX - this.posX;
 		double d1 = target.getEntityBoundingBox().minY + (double)(target.height / 3.0F) - entitytippedarrow.posY;
 		double d2 = target.posZ - this.posZ;
-		double d3 = (double)MathHelper.sqrt_double(d0 * d0 + d2 * d2);
+		double d3 = (double)MathHelper.sqrt(d0 * d0 + d2 * d2);
 		entitytippedarrow.setThrowableHeading(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, 0.5f);
-		DifficultyInstance difficultyinstance = this.worldObj.getDifficultyForLocation(new BlockPos(this));
-		entitytippedarrow.setDamage((double)(p_82196_2_ * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.worldObj.getDifficulty().getDifficultyId() * 0.11F));
+		DifficultyInstance difficultyinstance = this.world.getDifficultyForLocation(new BlockPos(this));
+		entitytippedarrow.setDamage((double)(p_82196_2_ * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.world.getDifficulty().getDifficultyId() * 0.11F));
 
 		this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-		this.worldObj.spawnEntityInWorld(entitytippedarrow);
+		this.world.spawnEntity(entitytippedarrow);
 	}
 }

@@ -40,6 +40,7 @@ public class ItemPaladinArmor extends  ModeledArmor{
 		case LEGS:
 			setArmorModel(AddonUmbraLux.proxy.getArmorModel(ClientProxy.PALAREST));
 			return;
+			
 		default:
 			break;
 		}

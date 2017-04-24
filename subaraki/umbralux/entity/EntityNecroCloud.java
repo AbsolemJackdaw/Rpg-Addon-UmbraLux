@@ -56,15 +56,15 @@ public class EntityNecroCloud extends EntityThrowable{
 		if(ticksExisted > 20)
 			this.setDead();
 
-		if(worldObj.isRemote){
+		if(world.isRemote){
 			for(int i = 0 ; i < 7; i++)
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX - 1f + worldObj.rand.nextFloat()*2f, -1f +posY+rand.nextDouble()*2f, posZ - 1f + worldObj.rand.nextFloat()*2f, 0.0D, 0.0D, 0.0D, new int[0]);
+				world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, posX - 1f + world.rand.nextFloat()*2f, -1f +posY+rand.nextDouble()*2f, posZ - 1f + world.rand.nextFloat()*2f, 0.0D, 0.0D, 0.0D, new int[0]);
 			for(int i = 0 ; i < 4; i++)
-				worldObj.spawnParticle(EnumParticleTypes.DRAGON_BREATH, posX - 1f + worldObj.rand.nextFloat()*2F, -1f +posY+rand.nextDouble()*2f, posZ - 1f + worldObj.rand.nextFloat()*2f, 0.0D, 0.0D, 0.0D, new int[0]);
+				world.spawnParticle(EnumParticleTypes.DRAGON_BREATH, posX - 1f + world.rand.nextFloat()*2F, -1f +posY+rand.nextDouble()*2f, posZ - 1f + world.rand.nextFloat()*2f, 0.0D, 0.0D, 0.0D, new int[0]);
 
 		}
 
-		worldObj.playSound(posX, posY, posZ, SoundEvents.ENTITY_ENDERDRAGON_AMBIENT, SoundCategory.HOSTILE, 0.5F, 1.0F, false);
+		world.playSound(posX, posY, posZ, SoundEvents.ENTITY_ENDERDRAGON_AMBIENT, SoundCategory.HOSTILE, 0.5F, 1.0F, false);
 	}
 }
 

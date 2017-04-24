@@ -1,6 +1,7 @@
 package subaraki.umbralux.handler.proxy;
 
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import subaraki.umbralux.entity.EntityNecroCloud;
 import subaraki.umbralux.entity.EntitySwordSpecial;
@@ -16,12 +17,12 @@ public class ServerProxy {
 	public void registerColors() {};
 	
 	public void registerEntities(){
-		EntityRegistry.registerModEntity(EntityNecroCloud.class, "necro_cloud", 0, AddonUmbraLux.MODID, 64, 250, true);
+		EntityRegistry.registerModEntity(new ResourceLocation("necro_cloud"), EntityNecroCloud.class, "necro_cloud", 0, AddonUmbraLux.MODID, 64, 250, true);
 		
-		EntityRegistry.registerModEntity(EntityMinionZombie.class, "zombie_minion", 1, AddonUmbraLux.MODID, 64, 250, false);
-		EntityRegistry.registerModEntity(EntityMinionSkeleton.class, "skeleton_minion", 2, AddonUmbraLux.MODID, 64, 250, false);
+		EntityRegistry.registerModEntity(new ResourceLocation("zombie_minion"),EntityMinionZombie.class, "zombie_minion", 1, AddonUmbraLux.MODID, 64, 250, false);
+		EntityRegistry.registerModEntity(new ResourceLocation("skeleton_minion"),EntityMinionSkeleton.class, "skeleton_minion", 2, AddonUmbraLux.MODID, 64, 250, false);
 	
-		EntityRegistry.registerModEntity(EntitySwordSpecial.class, "sword_special", 3, AddonUmbraLux.MODID, 64, 250, false);
+		EntityRegistry.registerModEntity(new ResourceLocation("sword_special"),EntitySwordSpecial.class, "sword_special", 3, AddonUmbraLux.MODID, 64, 250, false);
 
 	}
 }

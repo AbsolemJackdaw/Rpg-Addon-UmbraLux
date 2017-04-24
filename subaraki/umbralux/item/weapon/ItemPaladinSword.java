@@ -22,9 +22,11 @@ public class ItemPaladinSword extends ItemSword{
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos,
+	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 
+		ItemStack stack = playerIn.getHeldItem(hand);
+		
 		if(worldIn.getBlockState(pos.up()).equals(Blocks.AIR.getDefaultState()) && worldIn.getBlockState(pos.up(2)).equals(Blocks.AIR.getDefaultState()))
 			if(worldIn.getBlockState(pos).getBlock().canPlaceTorchOnTop(worldIn.getBlockState(pos), worldIn, pos)){
 
@@ -33,7 +35,7 @@ public class ItemPaladinSword extends ItemSword{
 				ess.setOwnerId(playerIn.getUniqueID());
 				ess.setItemStackToSlot(null, stack);
 				if(!worldIn.isRemote)
-					worldIn.spawnEntityInWorld(ess);
+					worldIn.spawnEntity(ess);
 
 				playerIn.setHeldItem(hand, null);
 

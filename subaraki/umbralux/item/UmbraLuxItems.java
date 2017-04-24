@@ -4,6 +4,7 @@ import static lib.item.ItemRegistry.registerItem;
 import static lib.item.ItemRegistry.registerRender;
 import static lib.item.ItemRegistry.registerVanillaRender;
 
+import lib.item.ItemRegistry;
 import lib.item.shield.ItemCustomShield;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -38,8 +39,8 @@ public class UmbraLuxItems {
 	
 	public static final CreativeTabs tab =  new CreativeTabs("addon_umbralux") {
 		@Override
-		public Item getTabIconItem() {
-			return necro_head;
+		public ItemStack getTabIconItem() {
+			return new ItemStack(necro_head);
 		}
 	};
 
@@ -54,7 +55,7 @@ public class UmbraLuxItems {
 		necromancer_shield = (ItemCustomShield) new ItemCustomShield(){
 			@Override
 			public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-				return repair.getItem().equals(Blocks.field_189880_di)/*bone block*/ ? true : super.getIsRepairable(toRepair, repair);
+				return repair.getItem().equals(Blocks.BONE_BLOCK) ? true : super.getIsRepairable(toRepair, repair);
 			}	
 		}.setCreativeTab(tab).setUnlocalizedName(modid+".necromancer_shield").setRegistryName("necromancer_shield").setMaxDamage(250);
 
@@ -70,7 +71,6 @@ public class UmbraLuxItems {
 				return repair.getItem().equals(Blocks.GOLD_BLOCK) ? true : super.getIsRepairable(toRepair, repair);
 			}	
 		}.setCreativeTab(tab).setUnlocalizedName(modid+".paladin_shield").setRegistryName("paladin_shield").setMaxDamage(250);
-
 
 		craftLeather = (ItemCraftLeather) new ItemCraftLeather().setCreativeTab(tab);
 
@@ -132,7 +132,7 @@ public class UmbraLuxItems {
 		});
 
 		GameRegistry.addRecipe(new ItemStack(necro_plate), new Object[]{
-				" B ","BPB"," B ", 'B', Blocks.field_189880_di /*bone block*/, 'P', Blocks.PLANKS
+				" B ","BPB"," B ", 'B', Blocks.BONE_BLOCK, 'P', Blocks.PLANKS
 		});
 		
 		GameRegistry.addRecipe(new ItemStack(paladin_plate), new Object[]{
@@ -159,24 +159,19 @@ public class UmbraLuxItems {
 	}
 	
 	private static void addArmorRecipe(){
-		String [][] recipePatterns = new String[][] { { "XXX", "X X" },
-			{ "X X", "XXX", "XXX" }, { "XXX", "X X", "X X" },
-			{ "X X", "X X" } };
+		ItemStack necroLeather = new ItemStack(craftLeather,1,0);
+		ItemStack paladinIngot = new ItemStack(craftLeather,1,1);
 
-			Object[][] recipeItems = new Object[][] { { new ItemStack(craftLeather,1,0), new ItemStack(craftLeather,1,1)},
-				{ necro_head, paladin_head },
-				{ necro_chest, paladin_chest },
-				{ necro_legs, paladin_legs },
-				{ necro_feet, paladin_feet } };
+		ItemRegistry.addArmorRecipe(necro_head, necroLeather, EntityEquipmentSlot.HEAD);
+		ItemRegistry.addArmorRecipe(necro_chest, necroLeather, EntityEquipmentSlot.CHEST);
+		ItemRegistry.addArmorRecipe(necro_legs, necroLeather, EntityEquipmentSlot.LEGS);
+		ItemRegistry.addArmorRecipe(necro_feet, necroLeather, EntityEquipmentSlot.FEET);
 
-				for (int var2 = 0; var2 < recipeItems[0].length; ++var2) {
-					Object var3 = recipeItems[0][var2];
+		ItemRegistry.addArmorRecipe(paladin_head, paladinIngot, EntityEquipmentSlot.HEAD);
+		ItemRegistry.addArmorRecipe(paladin_chest, paladinIngot, EntityEquipmentSlot.CHEST);
+		ItemRegistry.addArmorRecipe(paladin_legs, paladinIngot, EntityEquipmentSlot.LEGS);
+		ItemRegistry.addArmorRecipe(paladin_feet, paladinIngot, EntityEquipmentSlot.FEET);
 
-					for (int var4 = 0; var4 < (recipeItems.length - 1); ++var4) {
-						Item var5 = (Item) recipeItems[var4 + 1][var2];
-						GameRegistry.addRecipe(new ItemStack(var5), new Object[] {
-								recipePatterns[var4], 'X', var3 });
-					}
-				}
 	}
+		
 }
