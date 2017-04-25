@@ -49,7 +49,7 @@ public class ItemSkull extends Item{
 				else
 				{
 					ItemStack itemstack = entityIn.getActiveItemStack();
-					float timer = itemstack != null && itemstack.getItem() == UmbraLuxItems.skull? (float)(stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 20.0F : 0.0F;
+					float timer = itemstack != ItemStack.EMPTY && itemstack.getItem() == UmbraLuxItems.skull? (float)(stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 20.0F : 0.0F;
 
 					return timer;
 				}

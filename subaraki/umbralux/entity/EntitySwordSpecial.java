@@ -123,11 +123,11 @@ public class EntitySwordSpecial extends EntityLivingBase{
 	
 	private void removeSword(){
 		if(getOwner() == null)
-			if(inventory[0] != null)
+			if(inventory[0] != ItemStack.EMPTY)
 				if(!world.isRemote)
 					world.spawnEntity(new EntityItem(world, posX, posY, posZ, inventory[0].copy()));
 
-		if(getOwner()!= null && inventory[0] != null){
+		if(getOwner()!= null && inventory[0] != ItemStack.EMPTY){
 			if(!world.isRemote)
 				getOwner().inventory.addItemStackToInventory(inventory[0].copy());
 			getOwner().getCooldownTracker().setCooldown(inventory[0].getItem(), 250);
@@ -157,7 +157,7 @@ public class EntitySwordSpecial extends EntityLivingBase{
 
 	@Override
 	public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack stack) {
-		if(stack == null)
+		if(stack == ItemStack.EMPTY)
 			return;
 		inventory[0] = stack.copy();
 	}
@@ -179,7 +179,7 @@ public class EntitySwordSpecial extends EntityLivingBase{
 			this.setOwnerId(UUID.fromString(uuid));
 
 		NBTTagCompound stacktag = new NBTTagCompound();
-		if(inventory[0] != null){
+		if(inventory[0] != ItemStack.EMPTY){
 			inventory[0].writeToNBT(stacktag);
 			compound.setTag("stack", stacktag);
 		}

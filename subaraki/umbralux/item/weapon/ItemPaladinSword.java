@@ -37,7 +37,7 @@ public class ItemPaladinSword extends ItemSword{
 				if(!worldIn.isRemote)
 					worldIn.spawnEntity(ess);
 
-				playerIn.setHeldItem(hand, null);
+				playerIn.setHeldItem(hand, ItemStack.EMPTY);
 
 				return EnumActionResult.SUCCESS; //super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 			}

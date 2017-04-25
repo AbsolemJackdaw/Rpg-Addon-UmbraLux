@@ -37,7 +37,7 @@ public class PaladinWeaponEvent {
 
 		ItemStack heldItem = player.getHeldItemMainhand();
 
-		if(heldItem == null)
+		if(heldItem == ItemStack.EMPTY)
 			return;
 		if(heldItem.getItem().equals(UmbraLuxItems.paladin_sword))
 
