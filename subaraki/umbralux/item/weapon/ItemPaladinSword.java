@@ -12,6 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import subaraki.umbralux.entity.EntitySwordSpecial;
+import subaraki.umbralux.item.UmbraLuxItems;
 
 public class ItemPaladinSword extends ItemSword{
 
@@ -52,5 +53,10 @@ public class ItemPaladinSword extends ItemSword{
 				((EntityPlayer)entityLiving).getCooldownTracker().setCooldown(this, 7);
 
 		return super.onEntitySwing(entityLiving, stack);
+	}
+	
+	@Override
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+		return repair.getItem().equals(UmbraLuxItems.craftLeather) && repair.getMetadata() == 1 ? true : super.getIsRepairable(toRepair, repair);
 	}
 }

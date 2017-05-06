@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.IItemPropertyGetter;
@@ -196,5 +197,10 @@ public class ItemSkull extends Item{
 		}
 
 		return super.onLeftClickEntity(stack, player, entity);
+	}
+	
+	@Override
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+		return repair.getItem().equals(Blocks.BONE_BLOCK) ? true : super.getIsRepairable(toRepair, repair);
 	}
 }
