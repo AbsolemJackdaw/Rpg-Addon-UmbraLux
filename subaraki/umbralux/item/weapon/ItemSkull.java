@@ -4,7 +4,7 @@ import java.util.ConcurrentModificationException;
 
 import javax.annotation.Nullable;
 
-import lib.playerclass.PlayerClass;
+import lib.playerclass.capability.PlayerClass;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityTameable;
@@ -59,10 +59,15 @@ public class ItemSkull extends Item{
 	}
 
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft){
-		
-		if(!PlayerClass.isInstanceOf(UmbraLuxItems.NECROMANCER_CLASS))
+
+		if(!(entityLiving instanceof EntityPlayer))
 			return;
-		
+
+		EntityPlayer player = (EntityPlayer)entityLiving;
+
+		if(!PlayerClass.armorClass(player).armorClass(player).isInstanceOf(UmbraLuxItems.NECROMANCER_CLASS))
+			return;
+
 		float count = (float)(stack.getMaxItemUseDuration() - entityLiving.getItemInUseCount()) / 20.0F;
 		if(count >= 0.2F && count < 1.5F){
 			EntityNecroCloud cloud = new EntityNecroCloud(worldIn, entityLiving);
@@ -74,23 +79,20 @@ public class ItemSkull extends Item{
 			}
 		}
 		else if (count < 0.2F){
-			if(entityLiving instanceof EntityPlayer){
-				EntityPlayer player = (EntityPlayer)entityLiving;
-				if(MinionRegistry.minionsForPlayer(player).size() < (PlayerClass.isShielded() ? 5 : 2))
-					if(!player.getCooldownTracker().hasCooldown(this)){
-						EntityMinionZombie emz = new EntityMinionZombie(player.world);
-						emz.setPositionAndRotation(player.posX + player.getLook(1F).xCoord, player.posY, player.posZ + player.getLook(1F).zCoord, -player.getRotationYawHead(), -player.rotationPitch);
+			if(MinionRegistry.minionsForPlayer(player).size() < (PlayerClass.armorClass(player).armorClass(player).isShielded() ? 5 : 2))
+				if(!player.getCooldownTracker().hasCooldown(this)){
+					EntityMinionZombie emz = new EntityMinionZombie(player.world);
+					emz.setPositionAndRotation(player.posX + player.getLook(1F).xCoord, player.posY, player.posZ + player.getLook(1F).zCoord, -player.getRotationYawHead(), -player.rotationPitch);
 
-						if (!player.world.isRemote){
-							emz.setOwnerId(player.getUniqueID());
-							player.world.spawnEntity(emz);
-						}else{
-							for(int i = 0; i < 100; i++)
-								player.world.spawnParticle(EnumParticleTypes.FLAME, emz.posX-0.5+player.world.rand.nextDouble(), emz.posY - player.world.rand.nextDouble(), emz.posZ-0.5+player.world.rand.nextDouble(), 0, 0.1D, 0, new int[0]);
-						}
-						player.getCooldownTracker().setCooldown(this, 50);
+					if (!player.world.isRemote){
+						emz.setOwnerId(player.getUniqueID());
+						player.world.spawnEntity(emz);
+					}else{
+						for(int i = 0; i < 100; i++)
+							player.world.spawnParticle(EnumParticleTypes.FLAME, emz.posX-0.5+player.world.rand.nextDouble(), emz.posY - player.world.rand.nextDouble(), emz.posZ-0.5+player.world.rand.nextDouble(), 0, 0.1D, 0, new int[0]);
 					}
-			}
+					player.getCooldownTracker().setCooldown(this, 50);
+				}
 		}
 	}
 
@@ -198,7 +200,7 @@ public class ItemSkull extends Item{
 
 		return super.onLeftClickEntity(stack, player, entity);
 	}
-	
+
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
 		return repair.getItem().equals(Blocks.BONE_BLOCK) ? true : super.getIsRepairable(toRepair, repair);

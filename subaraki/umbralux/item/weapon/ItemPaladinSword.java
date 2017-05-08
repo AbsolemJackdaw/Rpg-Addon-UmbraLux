@@ -1,5 +1,6 @@
 package subaraki.umbralux.item.weapon;
 
+import lib.playerclass.capability.PlayerClass;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -26,10 +27,14 @@ public class ItemPaladinSword extends ItemSword{
 	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 
+		if(!PlayerClass.armorClass(playerIn).armorClass(playerIn).isInstanceOf(UmbraLuxItems.PALADIN_CLASS))
+			return EnumActionResult.FAIL;
+
 		ItemStack stack = playerIn.getHeldItem(hand);
-		
+
 		if(worldIn.getBlockState(pos.up()).equals(Blocks.AIR.getDefaultState()) && worldIn.getBlockState(pos.up(2)).equals(Blocks.AIR.getDefaultState()))
-			if(worldIn.getBlockState(pos).getBlock().canPlaceTorchOnTop(worldIn.getBlockState(pos), worldIn, pos)){
+			if(worldIn.getBlockState(pos).getBlock().canPlaceTorchOnTop(worldIn.getBlockState(pos), worldIn, pos) ||
+					worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos)){
 
 				EntitySwordSpecial ess = new EntitySwordSpecial(worldIn);
 				ess.setLocationAndAngles(pos.getX()+0.5d, pos.getY()+1, pos.getZ()+0.5d, 0, 0);
@@ -54,7 +59,7 @@ public class ItemPaladinSword extends ItemSword{
 
 		return super.onEntitySwing(entityLiving, stack);
 	}
-	
+
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
 		return repair.getItem().equals(UmbraLuxItems.craftLeather) && repair.getMetadata() == 1 ? true : super.getIsRepairable(toRepair, repair);
