@@ -9,7 +9,6 @@ import com.google.common.base.Optional;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityTameable;
