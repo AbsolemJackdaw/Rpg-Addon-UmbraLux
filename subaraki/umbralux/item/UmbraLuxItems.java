@@ -13,6 +13,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import subaraki.umbralux.item.armor.ItemNecromancerArmor;
 import subaraki.umbralux.item.armor.ItemPaladinArmor;
 import subaraki.umbralux.item.weapon.ItemPaladinSword;
@@ -75,6 +76,11 @@ public class UmbraLuxItems {
 		craftLeather = (ItemCraftLeather) new ItemCraftLeather().setCreativeTab(tab);
 
 		register();
+		
+		OreDictionary.registerOre("ingot", new ItemStack(craftLeather,1,1));
+		OreDictionary.registerOre("plate", necro_plate);
+		OreDictionary.registerOre("plate", paladin_plate);
+
 		loadRecipes();
 	}
 

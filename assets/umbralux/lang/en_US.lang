@@ -31,5 +31,11 @@ entity.umbralux.skeleton_minion.name=Skeleton Minion
 entity.umbralux.zombie_minion.name=Zombie Minion
 entity.umbralux.necro_cloud.name=Necromancer Cloud
 
+#Entity Names
+entity.necro_cloud.name=Dreath Breath
+entity.zombie_minion.name=Zombie Minion
+entity.skeleton_minion.name=Skeleton Minion
+entity.sword_special.name=Gladius Lux
+
 #Tab
 itemGroup.addon_umbralux=Necromancer and Paladin Classes
