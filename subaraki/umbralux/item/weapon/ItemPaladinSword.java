@@ -27,7 +27,7 @@ public class ItemPaladinSword extends ItemSword{
 	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 
-		if(!PlayerClass.armorClass(playerIn).armorClass(playerIn).isInstanceOf(UmbraLuxItems.PALADIN_CLASS))
+		if(!PlayerClass.get(playerIn).isPlayerClass(UmbraLuxItems.PALADIN_CLASS))
 			return EnumActionResult.FAIL;
 
 		ItemStack stack = playerIn.getHeldItem(hand);

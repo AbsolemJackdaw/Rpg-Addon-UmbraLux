@@ -15,12 +15,12 @@ import subaraki.umbralux.handler.proxy.ServerProxy;
 import subaraki.umbralux.item.UmbraLuxItems;
 import subaraki.umbralux.network.PacketHandler;
 
-@Mod(modid = AddonUmbraLux.MODID, name = AddonUmbraLux.NAME, version = AddonUmbraLux.VERSION, dependencies = "required-after:subcommonlib")
+@Mod(modid = AddonUmbraLux.MODID, name = AddonUmbraLux.NAME, version = AddonUmbraLux.VERSION, dependencies = "required-after:subcommonlib@[1.2,)")
 public class AddonUmbraLux {
 
 	public static final String MODID = "umbralux";
 	public static final String NAME = "Umbra - Lux Addon for Rpg Inventory";
-	public static final String VERSION = "1.11.2 2.0.1.0";
+	public static final String VERSION = "1.11.2-2.0.1.2";
 	
 	@SidedProxy(clientSide = "subaraki.umbralux.handler.proxy.ClientProxy", serverSide = "subaraki.umbralux.handler.proxy.ServerProxy")
 	public static ServerProxy proxy;

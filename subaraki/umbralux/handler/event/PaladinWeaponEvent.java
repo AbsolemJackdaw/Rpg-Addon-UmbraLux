@@ -12,6 +12,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import subaraki.umbralux.item.UmbraLuxItems;
+import subaraki.umbralux.mod.AddonUmbraLux;
 
 public class PaladinWeaponEvent {
 
@@ -40,14 +41,17 @@ public class PaladinWeaponEvent {
 		if(heldItem == ItemStack.EMPTY)
 			return;
 		if(heldItem.getItem().equals(UmbraLuxItems.paladin_sword))
-
-			if(PlayerClass.armorClass(player).armorClass(player).isInstanceOf(UmbraLuxItems.PALADIN_CLASS)){
-				if(PlayerClass.armorClass(player).armorClass(player).isShielded())
+		{
+			if(PlayerClass.get(player).isPlayerClass(UmbraLuxItems.PALADIN_CLASS))
+			{
+				if(PlayerClass.get(player).isShielded())
 					addEnchantment(Enchantments.SMITE, 4, heldItem);
 				else
 					addEnchantment(Enchantments.SMITE, 2, heldItem);
-			}else
+			}
+			else
 				removeEnchantment(Enchantments.SMITE, heldItem);
+		}
 	}
 
 	private void addEnchantment(Enchantment ench, int level, ItemStack stack){

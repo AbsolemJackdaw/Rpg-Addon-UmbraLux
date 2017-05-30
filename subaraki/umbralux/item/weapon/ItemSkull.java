@@ -58,6 +58,7 @@ public class ItemSkull extends Item{
 		});
 	}
 
+	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft){
 
 		if(!(entityLiving instanceof EntityPlayer))
@@ -65,7 +66,7 @@ public class ItemSkull extends Item{
 
 		EntityPlayer player = (EntityPlayer)entityLiving;
 
-		if(!PlayerClass.armorClass(player).armorClass(player).isInstanceOf(UmbraLuxItems.NECROMANCER_CLASS))
+		if(!PlayerClass.get(player).isPlayerClass(UmbraLuxItems.NECROMANCER_CLASS))
 			return;
 
 		float count = (float)(stack.getMaxItemUseDuration() - entityLiving.getItemInUseCount()) / 20.0F;
@@ -79,7 +80,7 @@ public class ItemSkull extends Item{
 			}
 		}
 		else if (count < 0.2F){
-			if(MinionRegistry.minionsForPlayer(player).size() < (PlayerClass.armorClass(player).armorClass(player).isShielded() ? 5 : 2))
+			if(MinionRegistry.minionsForPlayer(player).size() < (PlayerClass.get(player).isShielded() ? 5 : 2))
 				if(!player.getCooldownTracker().hasCooldown(this)){
 					EntityMinionZombie emz = new EntityMinionZombie(player.world);
 					emz.setPositionAndRotation(player.posX + player.getLook(1F).xCoord, player.posY, player.posZ + player.getLook(1F).zCoord, -player.getRotationYawHead(), -player.rotationPitch);
@@ -152,7 +153,7 @@ public class ItemSkull extends Item{
 
 				} catch (ConcurrentModificationException e){
 					//concurrent modification can occur when spawning a new entity, and draining at the same time.
-					//better catch it then let it crash
+					//better catch it than let it crash
 					e.printStackTrace();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -162,10 +163,11 @@ public class ItemSkull extends Item{
 		}
 	}
 
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand){
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand){
 
 		playerIn.setActiveHand(hand);
-		return new ActionResult(EnumActionResult.SUCCESS, itemStackIn);
+		return new ActionResult(EnumActionResult.SUCCESS, playerIn.getHeldItem(hand));
 	}
 
 	@Override

@@ -36,11 +36,12 @@ public class EntityNecroCloud extends EntityThrowable{
 
 			EntityLivingBase elb = (EntityLivingBase)result.entityHit;
 
-			if(!(elb instanceof IMinion) || elb instanceof EntityPlayer && elb.getEntityId()!=getThrower().getEntityId()){
-				elb.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), 5);
-				elb.addPotionEffect(new PotionEffect(new PotionEffect(MobEffects.WITHER, 20, 2)));
-				this.setDead();
-			}
+			if(!world.isRemote)
+				if(!(elb instanceof IMinion) || elb instanceof EntityPlayer && elb.getEntityId() != getThrower().getEntityId()){
+					elb.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), 5);
+					elb.addPotionEffect(new PotionEffect(new PotionEffect(MobEffects.WITHER, 80, 2)));
+					this.setDead();
+				}
 		}
 	}
 
