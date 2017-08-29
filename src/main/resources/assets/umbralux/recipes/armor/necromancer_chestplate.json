@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+	  "item": "umbralux:craftLeather",
+	  "data": 0
+    }
+  },
+  "result": {
+    "item": "umbralux:necromancer_chest"
+  }
+}

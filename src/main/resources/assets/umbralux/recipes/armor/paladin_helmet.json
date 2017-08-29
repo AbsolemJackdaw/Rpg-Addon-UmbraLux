@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X"
+  ],
+  "key": {
+    "X": {
+	  "item": "umbralux:craftLeather",
+	  "data": 1
+    }
+  },
+  "result": {
+    "item": "umbralux:paladin_head"
+  }
+}

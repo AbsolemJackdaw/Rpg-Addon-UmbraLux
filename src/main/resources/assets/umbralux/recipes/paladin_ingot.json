@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "subaraki",
+	"pattern": [
+        "NNN",
+        "NIN",
+		"NNN"
+    ],
+    "key": {
+        "N": { "item": "minecraft:gold_nugget" },
+		"I": { "item": "minecraft:iron_ingot" }
+    },
+    "result": {
+        "item": "umbralux:craftLeather",
+		"data": 1
+	}
+}

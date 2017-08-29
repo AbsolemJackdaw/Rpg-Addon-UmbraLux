@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "subaraki",
+	"pattern": [
+        "PPP",
+        "PDP",
+		" P "
+    ],
+    "key": {
+        "P": { "item": "umbralux:necro_plate" },
+		"D": { "item": "umbralux:necromancerskull" }
+    },
+    "result": {
+        "item": "umbralux:necromancer_shield"
+	}
+}

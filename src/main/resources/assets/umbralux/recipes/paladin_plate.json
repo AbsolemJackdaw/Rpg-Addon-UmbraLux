@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "subaraki",
+	"pattern": [
+        " B ",
+        "BPB",
+		" B "
+    ],
+    "key": {
+        "P": { "item": "minecraft:planks", "data": 32767},
+		"B": { "item": "umbralux:craftLeather", "data": 1 }
+    },
+    "result": {
+        "item": "umbralux:paladin_plate"
+	}
+}

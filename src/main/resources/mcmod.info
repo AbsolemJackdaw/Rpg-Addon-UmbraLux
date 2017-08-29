@@ -1,0 +1,16 @@
+[
+{
+  "modid": "umbralux",
+  "name": "Umbralux - Class Armor Mod",
+  "description": "Crawl in the skin of the Mighty, fierce paladin, slaying the undead, or become the silent ruler of the underworld as a Necromancer ",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://minecraft.curseforge.com/projects/class-armor-necromancer-and-paladin",
+  "updateUrl": "https://minecraft.curseforge.com/projects/class-armor-necromancer-and-paladin/files",
+  "authorList": ["Subaraki"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

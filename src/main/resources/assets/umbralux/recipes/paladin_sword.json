@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "subaraki",
+	"pattern": [
+        "  H",
+        "GH ",
+		"SG "
+    ],
+    "key": {
+        "S": { "item": "minecraft:stick" },
+		"G": { "item": "umbralux:craftLeather", "data":1 },
+		"H": { "item": "minecraft:glowstone_dust" }
+
+    },
+    "result": {
+        "item": "umbralux:paladin_sword"
+	}
+}

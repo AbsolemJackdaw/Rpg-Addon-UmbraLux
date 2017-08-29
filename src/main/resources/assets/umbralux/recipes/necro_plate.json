@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "subaraki",
+	"pattern": [
+        " B ",
+        "BPB",
+		" B "
+    ],
+    "key": {
+        "P": { "item": "minecraft:planks", "data": 32767},
+		"B": { "item": "minecraft:bone_block" }
+    },
+    "result": {
+        "item": "umbralux:necro_plate"
+	}
+}
