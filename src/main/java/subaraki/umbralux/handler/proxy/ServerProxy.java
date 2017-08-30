@@ -25,4 +25,6 @@ public class ServerProxy {
 		EntityRegistry.registerModEntity(new ResourceLocation("umbralux","sword_special"),EntitySwordSpecial.class, "sword_special", 3, AddonUmbraLux.MODID, 64, 250, false);
 
 	}
+	public void addRenderLayers() {
+	}
 }

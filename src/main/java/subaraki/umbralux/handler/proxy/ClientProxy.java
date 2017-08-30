@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import subaraki.umbralux.entity.EntityNecroCloud;
@@ -17,6 +18,7 @@ import subaraki.umbralux.entity.minion.RenderMinionZombie;
 import subaraki.umbralux.item.UmbraLuxItems;
 import subaraki.umbralux.item.armor.model.ModelNecromancerArmor;
 import subaraki.umbralux.item.armor.model.ModelPaladinArmor;
+import subaraki.umbralux.render.player.LayerNecromancerCache;
 
 public class ClientProxy extends ServerProxy{
 
@@ -87,4 +89,14 @@ public class ClientProxy extends ServerProxy{
 				);
 	}
 
+	@Override
+	public void addRenderLayers(){
+
+		String types[] = new String[]{"default","slim"};
+
+		for(String type : types){
+			RenderPlayer renderer = ((RenderPlayer)Minecraft.getMinecraft().getRenderManager().getSkinMap().get(type));
+			renderer.addLayer(new LayerNecromancerCache(renderer));
+		}
+	}
 }

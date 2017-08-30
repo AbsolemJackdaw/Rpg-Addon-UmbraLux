@@ -53,5 +53,6 @@ public class AddonUmbraLux {
 	@EventHandler
 	public void initEvent(FMLInitializationEvent event){
 		proxy.registerColors();
+		proxy.addRenderLayers();
 	}
 }

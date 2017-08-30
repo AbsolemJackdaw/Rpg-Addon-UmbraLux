@@ -93,6 +93,7 @@ public class ModelNecromancerArmor extends ModelBiped {
 			float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		this.bipedHead.isHidden = true;
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
