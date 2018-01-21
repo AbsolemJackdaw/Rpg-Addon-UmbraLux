@@ -219,7 +219,7 @@ public class EntityMinionSkeleton extends EntityTameable  implements IMob, IMini
 		float distanceToMaster = 18.0F;
 		if(this.getAttackTarget() == null){
 			if (getMaster() != null) {
-				distanceToMaster = this.getDistanceToEntity(getMaster());
+				distanceToMaster = (float) this.getDistanceSq(getMaster());
 				if ((distanceToMaster > 3.0F) && (distanceToMaster < 18.0F)) {
 					Path var2 = getNavigator().getPathToEntityLiving(owner);
 					this.getNavigator().setPath(var2, this.getAIMoveSpeed()*1.5f);
@@ -238,7 +238,7 @@ public class EntityMinionSkeleton extends EntityTameable  implements IMob, IMini
 		double d1 = target.getEntityBoundingBox().minY + (double)(target.height / 3.0F) - entitytippedarrow.posY;
 		double d2 = target.posZ - this.posZ;
 		double d3 = (double)MathHelper.sqrt(d0 * d0 + d2 * d2);
-		entitytippedarrow.setThrowableHeading(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, 0.5f);
+		entitytippedarrow.shoot(d0, d1 + d3 * 0.20000000298023224D, d2, 1.6F, 0.5f);
 		DifficultyInstance difficultyinstance = this.world.getDifficultyForLocation(new BlockPos(this));
 		entitytippedarrow.setDamage((double)(p_82196_2_ * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.world.getDifficulty().getDifficultyId() * 0.11F));
 

@@ -17,12 +17,12 @@ public class ServerProxy {
 	public void registerColors() {};
 	
 	public void registerEntities(){
-		EntityRegistry.registerModEntity(new ResourceLocation("umbralux","necro_cloud"), EntityNecroCloud.class, "necro_cloud", 0, AddonUmbraLux.MODID, 64, 250, true);
-		
-		EntityRegistry.registerModEntity(new ResourceLocation("umbralux","zombie_minion"),EntityMinionZombie.class, "zombie_minion", 1, AddonUmbraLux.MODID, 64, 250, false);
-		EntityRegistry.registerModEntity(new ResourceLocation("umbralux","skeleton_minion"),EntityMinionSkeleton.class, "skeleton_minion", 2, AddonUmbraLux.MODID, 64, 250, false);
-	
-		EntityRegistry.registerModEntity(new ResourceLocation("umbralux","sword_special"),EntitySwordSpecial.class, "sword_special", 3, AddonUmbraLux.MODID, 64, 250, false);
+//		EntityRegistry.registerModEntity(new ResourceLocation("umbralux","necro_cloud"), EntityNecroCloud.class, "necro_cloud", 0, AddonUmbraLux.MODID, 64, 250, true);
+//		
+//		EntityRegistry.registerModEntity(new ResourceLocation("umbralux","zombie_minion"),EntityMinionZombie.class, "zombie_minion", 1, AddonUmbraLux.MODID, 64, 250, false);
+//		EntityRegistry.registerModEntity(new ResourceLocation("umbralux","skeleton_minion"),EntityMinionSkeleton.class, "skeleton_minion", 2, AddonUmbraLux.MODID, 64, 250, false);
+//	
+//		EntityRegistry.registerModEntity(new ResourceLocation("umbralux","sword_special"),EntitySwordSpecial.class, "sword_special", 3, AddonUmbraLux.MODID, 64, 250, false);
 
 	}
 	public void addRenderLayers() {

@@ -213,7 +213,7 @@ public class EntityMinionZombie extends EntityTameable  implements IMob, IMinion
 		float distanceToMaster = 18.0F;
 		if(this.getAttackTarget() == null){
 			if (getMaster() != null) {
-				distanceToMaster = this.getDistanceToEntity(getMaster());
+				distanceToMaster = (float) this.getDistanceSq(getMaster());
 
 				if ((distanceToMaster > 3.0F) && (distanceToMaster < 18.0F)) {
 					Path var2 = getNavigator().getPathToEntityLiving(owner);
