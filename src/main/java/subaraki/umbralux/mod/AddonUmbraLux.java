@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import subaraki.umbralux.block.UmbraLuxBlocks;
 import subaraki.umbralux.config.ConfigurationHandler;
+import subaraki.umbralux.entity.EntityHandler;
 import subaraki.umbralux.handler.event.MinionAttackEvent;
 import subaraki.umbralux.handler.event.PaladinWeaponEvent;
 import subaraki.umbralux.handler.proxy.ServerProxy;
@@ -37,10 +38,12 @@ public class AddonUmbraLux {
 
 		ConfigurationHandler.instance.loadConfig(event.getSuggestedConfigurationFile());
 
+		new EntityHandler();
+		
 		UmbraLuxItems.loadItems();
 		UmbraLuxBlocks.loadBlocks();
 		
-		proxy.registerEntities();
+		//proxy.registerEntities();
 		//items come before registering the renders
 		proxy.registerRenders();
 		

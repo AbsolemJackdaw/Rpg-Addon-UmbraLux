@@ -27,9 +27,9 @@ public class EntityHandler {
 		EntityRegistry er = new EntityRegistry();
 
 		EntityEntryBuilder necro_cloud = er.registerEntity(EntityNecroCloud.class, EntityNecroCloud::new, AddonUmbraLux.MODID, "necro_cloud", 0, 256, 4, true);
-		EntityEntryBuilder zombie_minion = er.registerEntity(EntityMinionZombie.class, EntityMinionZombie::new, AddonUmbraLux.MODID, "zombie_minion", 1, 256, 4, true);
-		EntityEntryBuilder skeleton_minion = er.registerEntity(EntityMinionSkeleton.class, EntityMinionSkeleton::new, AddonUmbraLux.MODID, "necro_cloud", 2, 256, 4, true);
-		EntityEntryBuilder sword_special = er.registerEntity(EntitySwordSpecial.class, EntitySwordSpecial::new, AddonUmbraLux.MODID, "sword_special", 3, 256, 4, true);
+		EntityEntryBuilder zombie_minion = er.registerEntity(EntityMinionZombie.class, EntityMinionZombie::new, AddonUmbraLux.MODID, "zombie_minion", 1, 256, 4, false);
+		EntityEntryBuilder skeleton_minion = er.registerEntity(EntityMinionSkeleton.class, EntityMinionSkeleton::new, AddonUmbraLux.MODID, "skeleton_minion", 2, 256, 4, false);
+		EntityEntryBuilder sword_special = er.registerEntity(EntitySwordSpecial.class, EntitySwordSpecial::new, AddonUmbraLux.MODID, "sword_special", 3, 256, 4, false);
 
 		entities.add(necro_cloud);
 		entities.add(zombie_minion);
