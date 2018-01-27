@@ -32,7 +32,7 @@ public class RenderSwordSpecial extends Render<EntitySwordSpecial>{
 	public void doRender(EntitySwordSpecial entity, double x, double y, double z, float entityYaw, float partialTicks) {
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
 		ItemStack sword = entity.getItemStackFromSlot(null);
-		if(sword == ItemStack.EMPTY)
+		if(sword.isEmpty())
 			sword = new ItemStack(UmbraLuxItems.paladin_sword);
 
 		RenderItem render = Minecraft.getMinecraft().getRenderItem();

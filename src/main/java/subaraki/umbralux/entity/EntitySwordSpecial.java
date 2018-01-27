@@ -3,6 +3,7 @@ package subaraki.umbralux.entity;
 import java.util.List;
 import java.util.UUID;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.google.common.base.Optional;
@@ -23,6 +24,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -36,7 +38,8 @@ import subaraki.umbralux.entity.minion.IMinion;
 
 public class EntitySwordSpecial extends EntityLivingBase{
 
-	private ItemStack[] inventory = new ItemStack[1];
+	private NonNullList<ItemStack> inventory = NonNullList.withSize(1, ItemStack.EMPTY);
+
 	protected static final DataParameter<Optional<UUID>> OWNER_UNIQUE_ID = EntityDataManager.<Optional<UUID>>createKey(EntityTameable.class, DataSerializers.OPTIONAL_UNIQUE_ID);
 
 	public EntitySwordSpecial(World worldIn) {
@@ -65,18 +68,18 @@ public class EntitySwordSpecial extends EntityLivingBase{
 		attackSurroundingEntities();
 
 		spawnParticles();
-		
+
 		if(ticksExisted > 250 || getOwner() == null){
 			this.setDead();
 			removeSword();
 		}
 	}
-	
+
 	private void attackSurroundingEntities(){
-		
+
 		float damage = (float)ConfigurationHandler.instance.paladin_special;
 
-		List<EntityLivingBase> enemiesInRange = world.getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox().expand(5, 2, 5));
+		List<EntityLivingBase> enemiesInRange = world.getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox().grow(5, 2, 5));
 		for(EntityLivingBase elb : enemiesInRange){
 			if(elb instanceof IMinion){
 				if(elb.ticksExisted%5==0){
@@ -93,10 +96,14 @@ public class EntitySwordSpecial extends EntityLivingBase{
 				}
 			}
 			else if(elb instanceof EntityPlayer){
-				if(!((EntityPlayer)elb).equals(getOwner()) || getOwner().canAttackPlayer((EntityPlayer)elb) || getServer() != null && getServer().isPVPEnabled()){
-					if(elb.ticksExisted%5==0){
-						elb.setFire(5);
-						elb.attackEntityFrom(DamageSourcePaladin.causeHolySwordDamage(this), damage/1.25f);
+
+				if(!((EntityPlayer)elb).equals(getOwner())){
+					if(getOwner().canAttackPlayer((EntityPlayer)elb) || getServer() != null && getServer().isPVPEnabled())
+					{
+						if(elb.ticksExisted%5==0){
+							elb.setFire(5);
+							elb.attackEntityFrom(DamageSourcePaladin.causeHolySwordDamage(this), damage/1.25f);
+						}
 					}
 				}
 			}
@@ -123,17 +130,17 @@ public class EntitySwordSpecial extends EntityLivingBase{
 			}
 		}
 	}
-	
+
 	private void removeSword(){
 		if(getOwner() == null)
-			if(inventory[0] != ItemStack.EMPTY)
+			if(!inventory.get(0).isEmpty())
 				if(!world.isRemote)
-					world.spawnEntity(new EntityItem(world, posX, posY, posZ, inventory[0].copy()));
+					world.spawnEntity(new EntityItem(world, posX, posY, posZ, inventory.get(0).copy()));
 
-		if(getOwner()!= null && inventory[0] != ItemStack.EMPTY){
+		if(getOwner()!= null && inventory.get(0) != ItemStack.EMPTY){
 			if(!world.isRemote)
-				getOwner().inventory.addItemStackToInventory(inventory[0].copy());
-			getOwner().getCooldownTracker().setCooldown(inventory[0].getItem(), 250);
+				getOwner().inventory.addItemStackToInventory(inventory.get(0).copy());
+			getOwner().getCooldownTracker().setCooldown(inventory.get(0).getItem(), 250);
 		}
 
 		BlockPos pos = new BlockPos(posX, posY, posZ);
@@ -143,26 +150,26 @@ public class EntitySwordSpecial extends EntityLivingBase{
 			}
 		}
 	}
-	
+
 	/////////////////////////////////////////////////////////
 	////////////////Base stuff be here///////////////////////
 	/////////////////////////////////////////////////////////
 
 	@Override
 	public Iterable<ItemStack> getArmorInventoryList() {
-		return Arrays.asList(this.inventory);
+		return inventory;
 	}
 
 	@Override
 	public ItemStack getItemStackFromSlot(EntityEquipmentSlot slotIn) {
-		return inventory[0];
+		return inventory.get(0);
 	}
 
 	@Override
 	public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack stack) {
 		if(stack == ItemStack.EMPTY)
 			return;
-		inventory[0] = stack.copy();
+		inventory.set(0, stack.copy());
 	}
 
 	@Override
@@ -182,8 +189,8 @@ public class EntitySwordSpecial extends EntityLivingBase{
 			this.setOwnerId(UUID.fromString(uuid));
 
 		NBTTagCompound stacktag = new NBTTagCompound();
-		if(inventory[0] != ItemStack.EMPTY){
-			inventory[0].writeToNBT(stacktag);
+		if(inventory.get(0) != ItemStack.EMPTY){
+			inventory.get(0).writeToNBT(stacktag);
 			compound.setTag("stack", stacktag);
 		}
 	}
@@ -199,7 +206,7 @@ public class EntitySwordSpecial extends EntityLivingBase{
 
 		if(compound.hasKey("stack")){
 			NBTTagCompound stackTag = compound.getCompoundTag("stack");
-			inventory[0] = new ItemStack(stackTag);
+			inventory.set(0, new ItemStack(stackTag));
 		}
 	}
 
